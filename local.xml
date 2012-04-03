@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<repositories version="1.0">
+  <repo quality="experimental" status="unofficial">
+    <name><![CDATA[L2G]]></name>
+    <description lang="en"><![CDATA[Local overlay]]></description>
+    <owner type="person">
+      <email>larry@L2G.to</email>
+      <name><![CDATA[Larry Gilbert]]></name>
+    </owner>
+    <source type="source">file:///usr/local/portage</source>
+  </repo>
+</repositories>
