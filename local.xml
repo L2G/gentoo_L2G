@@ -7,6 +7,6 @@
       <email>larry@L2G.to</email>
       <name><![CDATA[Larry Gilbert]]></name>
     </owner>
-    <source type="source">file:///usr/local/portage</source>
+    <source type="git">file:///usr/local/portage</source>
   </repo>
 </repositories>
