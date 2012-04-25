@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<!--
+$Header: /var/cvsroot/gentoo-x86/skel.metadata.xml,v 1.21 2012/02/07 00:03:15 idl0r Exp $
+-->
+<pkgmetadata>
+<maintainer>
+	<email>larry@L2G.to</email>
+</maintainer>
+<longdescription>Virtual dependency for requiring any term-based Web browser</longdescription>
+</pkgmetadata>
