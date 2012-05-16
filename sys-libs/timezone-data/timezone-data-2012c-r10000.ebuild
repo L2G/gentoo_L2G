@@ -7,9 +7,9 @@ inherit eutils toolchain-funcs flag-o-matic
 code_ver=${PV%c}b
 data_ver=${PV}
 DESCRIPTION="Timezone data (/usr/share/zoneinfo) and utilities (tzselect/zic/zdump)"
-HOMEPAGE="http://www.twinsun.com/tz/tz-link.htm https://mm.icann.org/mailman/listinfo/tz"
-SRC_URI="ftp://munnari.oz.au/pub/tzdata${data_ver}.tar.gz
-	ftp://munnari.oz.au/pub/tzcode${code_ver}.tar.gz"
+HOMEPAGE="http://www.iana.org/time-zones https://mm.icann.org/mailman/listinfo/tz"
+SRC_URI="http://www.iana.org/time-zones/repository/releases/tzdata${data_ver}.tar.gz
+	http://www.iana.org/time-zones/repository/releases/tzcode${code_ver}.tar.gz"
 
 LICENSE="BSD public-domain"
 SLOT="0"
