@@ -1,12 +1,13 @@
-# Copyright 1999-2011 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-analyzer/barnyard2/barnyard2-1.9.ebuild,v 1.2 2011/04/02 12:54:23 ssuominen Exp $
 
 EAPI="2"
+MY_PV="v2-${PV/_/-}"
 
 DESCRIPTION="Parser for Snort unified/unified2 files"
 HOMEPAGE="http://www.securixlive.com/barnyard2/"
-SRC_URI="http://www.securixlive.com/download/barnyard2/${P}.tar.gz"
+SRC_URI="https://github.com/firnsy/barnyard2/tarball/${MY_PV} -> ${P}.tar.gz"
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"

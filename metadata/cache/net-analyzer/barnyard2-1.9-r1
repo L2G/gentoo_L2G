@@ -1,7 +1,7 @@
 net-libs/libpcap mysql? ( virtual/mysql ) postgres? ( dev-db/postgresql-server ) odbc? ( dev-db/unixODBC )
 net-libs/libpcap mysql? ( virtual/mysql ) postgres? ( dev-db/postgresql-server ) odbc? ( dev-db/unixODBC )
 0
-http://www.securixlive.com/download/barnyard2/barnyard2-1.9.tar.gz
+https://github.com/firnsy/barnyard2/tarball/v2-1.9 -> barnyard2-1.9.tar.gz
 
 http://www.securixlive.com/barnyard2/
 GPL-2
