@@ -16,13 +16,14 @@ LICENSE="LGPL-2"
 SLOT="2"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
 IUSE="doc +gtk +introspection tools"
+IUSE="doc +gtk +introspection +pixbuf-loader tools"
 
 RDEPEND=">=dev-libs/glib-2.24:2
 	>=x11-libs/cairo-1.2
 	>=x11-libs/pango-1.16
 	>=dev-libs/libxml2-2.7:2
 	>=dev-libs/libcroco-0.6.1
-	x11-libs/gdk-pixbuf:2[introspection?]
+	pixbuf-loader? ( x11-libs/gdk-pixbuf:2[X,introspection?] )
 	gtk? (
 		>=x11-libs/gtk+-2.16:2
 		tools? ( >=x11-libs/gtk+-3:3 ) )
@@ -41,7 +42,7 @@ pkg_setup() {
 		$(use_enable tools)
 		$(use_enable gtk gtk-theme)
 		$(use_enable introspection)
-		--enable-pixbuf-loader"
+		$(use_enable pixbuf-loader)"
 	if use gtk && use tools; then
 		G2CONF="${G2CONF} --enable-rsvg-view"
 	else
@@ -68,31 +69,35 @@ src_compile() {
 }
 
 pkg_postinst() {
-	# causes segfault if set, see bug 375615
-	unset __GL_NO_DSO_FINALIZER
+	if use pixbuf-loader; then
+		# causes segfault if set, see bug 375615
+		unset __GL_NO_DSO_FINALIZER
 
-	tmp_file=$(mktemp -t tmp.XXXXXXXXXXlibrsvg_ebuild)
-	# be atomic!
-	gdk-pixbuf-query-loaders > "${tmp_file}"
-	if [ "${?}" = "0" ]; then
-		cat "${tmp_file}" > "${EROOT}usr/$(get_libdir)/gdk-pixbuf-2.0/2.10.0/loaders.cache"
-	else
-		ewarn "Cannot update loaders.cache, gdk-pixbuf-query-loaders failed to run"
+		tmp_file=$(mktemp -t tmp.XXXXXXXXXXlibrsvg_ebuild)
+		# be atomic!
+		gdk-pixbuf-query-loaders > "${tmp_file}"
+		if [ "${?}" = "0" ]; then
+			cat "${tmp_file}" > "${EROOT}usr/$(get_libdir)/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+		else
+			ewarn "Cannot update loaders.cache, gdk-pixbuf-query-loaders failed to run"
+		fi
+		rm "${tmp_file}"
 	fi
-	rm "${tmp_file}"
 }
 
 pkg_postrm() {
-	# causes segfault if set, see bug 375615
-	unset __GL_NO_DSO_FINALIZER
+	if use pixbuf-loader; then
+		# causes segfault if set, see bug 375615
+		unset __GL_NO_DSO_FINALIZER
 
-	tmp_file=$(mktemp -t tmp.XXXXXXXXXXlibrsvg_ebuild)
-	# be atomic!
-	gdk-pixbuf-query-loaders > "${tmp_file}"
-	if [ "${?}" = "0" ]; then
-		cat "${tmp_file}" > "${EROOT}usr/$(get_libdir)/gdk-pixbuf-2.0/2.10.0/loaders.cache"
-	else
-		ewarn "Cannot update loaders.cache, gdk-pixbuf-query-loaders failed to run"
+		tmp_file=$(mktemp -t tmp.XXXXXXXXXXlibrsvg_ebuild)
+		# be atomic!
+		gdk-pixbuf-query-loaders > "${tmp_file}"
+		if [ "${?}" = "0" ]; then
+			cat "${tmp_file}" > "${EROOT}usr/$(get_libdir)/gdk-pixbuf-2.0/2.10.0/loaders.cache"
+		else
+			ewarn "Cannot update loaders.cache, gdk-pixbuf-query-loaders failed to run"
+		fi
+		rm "${tmp_file}"
 	fi
-	rm "${tmp_file}"
 }
