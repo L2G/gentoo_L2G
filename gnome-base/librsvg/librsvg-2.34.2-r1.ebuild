@@ -16,7 +16,7 @@ SRC_URI="${SRC_URI} mirror://gentoo/introspection.m4.bz2"
 LICENSE="LGPL-2"
 SLOT="2"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
-IUSE="doc +gtk gtk3 +introspection tools"
+IUSE="doc +gtk gtk3 +introspection +pixbuf-loader tools"
 
 RDEPEND=">=media-libs/fontconfig-1.0.1
 	>=media-libs/freetype-2
@@ -25,9 +25,9 @@ RDEPEND=">=media-libs/fontconfig-1.0.1
 	>=x11-libs/pango-1.10
 	>=dev-libs/libxml2-2.4.7:2
 	>=dev-libs/libcroco-0.6.1
-	x11-libs/gdk-pixbuf:2[introspection?]
 	gtk? ( >=x11-libs/gtk+-2.16:2 )
 	gtk3? ( >=x11-libs/gtk+-2.90.0:3 )
+	pixbuf-loader? ( x11-libs/gdk-pixbuf:2[X,introspection?] )
 	introspection? ( >=dev-libs/gobject-introspection-0.10.8 )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
@@ -44,7 +44,7 @@ pkg_setup() {
 		$(use_enable gtk gtk-theme)
 		$(use_enable introspection)
 		--with-croco
-		--enable-pixbuf-loader"
+		$(use_enable pixbuf-loader)"
 	use gtk && ! use gtk3 && G2CONF+=" --with-gtk=2.0"
 	use gtk && use gtk3 && G2CONF+=" --with-gtk=both"
 	! use gtk && use gtk3 && G2CONF+=" --with-gtk=3.0 --enable-gtk-theme"
