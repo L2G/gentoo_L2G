@@ -39,7 +39,7 @@ src_prepare() {
 }
 
 src_install() {
-	distutils_src_install --install-data=/usr/share
+	distutils_src_install --install-data=${EPREFIX}/usr/share
 
 	dosym ${PN}.py /usr/bin/${PN} || die
 }
